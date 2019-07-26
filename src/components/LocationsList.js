@@ -51,7 +51,7 @@ const LocationsList = () => {
           {locations.map(location => (
             <Card key={location.id}>
               <Card.Content>
-              <Link to={`/doctor/${location.id}/${location.name}`}>
+              <Link to={`/location/${location.id}`}>
                 <Image floated="right">
                   <Icon name="world" size="large" color="green" />
                 </Image>

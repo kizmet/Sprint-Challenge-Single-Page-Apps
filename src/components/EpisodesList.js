@@ -13,18 +13,18 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const CharacterList = () => {
+const EpisodesList = () => {
   // TODO: Add useState to track data from useEffect
-  const [characters, setCharacters] = useState([]);
+  const [episodes, setEpisodes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const url = "https://rickandmortyapi.com/api/character/";
+  const url = "https://rickandmortyapi.com/api/episode/";
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const result = await axios.get(url);
       const { data } = await result;
-      setCharacters(data.results);
+      setEpisodes(data.results);
       setIsLoading(false);
     };
     fetchData();
@@ -36,42 +36,31 @@ const CharacterList = () => {
 
   return (
     <Container>
-      <style>
-        {`
-      html, body {
-        background-color: #252839 !important;
-      }
-    }
-    `}
-      </style>
       {isLoading && (
         <Fragment>
           <Loader active inline className="slow red" />
         </Fragment>
       )}
       <Header as="h2" icon inverted textAlign="center">
-        {console.log(characters)}
-        <Icon name="grid layout" />
         Characters
         <Header.Subheader>Rick and Morty Show Characters</Header.Subheader>
       </Header>
+      
       <Grid celled columns={2}>
         <Card.Group itemsPerRow={2} centered>
-          {characters.map(character => (
-            <Card key={character.id}>
+          {episodes.map(episode => (
+            <Card key={episode.id}>
               <Card.Content>
-                <Link to={`/character/${character.id}/${character.name}`}>
-                  <Image className="characterImg" src={character.image} />
+              <Link to={`/doctor/${episode.id}/${episode.name}`}>
+                <Image floated="right">
+                  <Icon name="world" size="large" color="green" />
+                </Image>
                 </Link>
-                <Card.Header>{`${character.name}`}</Card.Header>
+                <Card.Header>{episode.name}</Card.Header>
+                <Card.Meta>{episode.air_date}</Card.Meta>
+                <Card.Description>{episode.episode}</Card.Description>
               </Card.Content>
-              <Card.Content extra>
-                  <Button basic color="blue">
-                    Page
-                  </Button>
 
-
-              </Card.Content>
             </Card>
           ))}
         </Card.Group>
@@ -80,4 +69,4 @@ const CharacterList = () => {
   );
 };
 
-export default CharacterList;
+export default EpisodesList;
