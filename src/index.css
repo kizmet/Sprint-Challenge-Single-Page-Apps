@@ -38,3 +38,15 @@ header h1 {
   text-align: center;
 
 }
+
+/*.image .characterImg{
+  height: 100px;
+    width: 100px;
+    border-radius: 50%!important;
+}*/
+
+.ui.card .content img, .ui.cards>.card .content img {
+   height: 100px;
+    width: 100px; 
+    border-radius: 50%!important;
+}
